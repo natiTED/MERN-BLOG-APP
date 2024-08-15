@@ -6,7 +6,7 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        target: "https://mern-blog-app-backend-ku8p.onrender.com",
+        target: "http://localhost:5000",
         secure: false,
       },
     },
