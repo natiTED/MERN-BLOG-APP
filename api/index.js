@@ -10,6 +10,8 @@ import path from "path";
 
 dotenv.config();
 
+const __dirname = path.resolve();
+
 mongoose
   .connect(process.env.Mongo)
   .then(() => {
@@ -19,14 +21,18 @@ mongoose
     console.log(err);
   });
 
-const __dirname = path.resolve();
-
 const app = express();
 
 const port = process.env.PORT || 3000;
 
 app.use(express.json());
 app.use(cookieParser());
+
+app.use(express.static(path.join(__dirname, "/client/dist")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
+});
 
 app.listen(port, () => {
   console.log("Server is running on port 3000!");
