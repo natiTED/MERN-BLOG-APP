@@ -23,7 +23,7 @@ mongoose
 
 const app = express();
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5000;
 
 app.use(express.json());
 app.use(cookieParser());
@@ -35,7 +35,7 @@ app.get("*", (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log("Server is running on port 3000!");
+  console.log(`Server is running on port ${port}`);
 });
 
 app.use("/api/user", userRoutes);
@@ -43,11 +43,11 @@ app.use("/api/auth", authRoutes);
 app.use("/api/post", postRoutes);
 app.use("/api/comment", commentRoutes);
 
-app.use(express.static(path.join(__dirname, "/client/dist")));
+// app.use(express.static(path.join(__dirname, "/client/dist")));
 
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
-});
+// app.get("*", (req, res) => {
+//   res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
+// });
 
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;
